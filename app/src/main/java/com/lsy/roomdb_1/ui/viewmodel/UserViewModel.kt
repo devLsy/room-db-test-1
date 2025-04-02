@@ -19,4 +19,22 @@ class UserViewModel(private val repository: UserRepository): ViewModel() {
             _allUsers.value = repository.getAllUsers()
         }
     }
+
+    fun insert(user: UserEntity) {
+        viewModelScope.launch {
+            repository.insert(user)
+        }
+    }
+
+    fun update(user: UserEntity) {
+        viewModelScope.launch {
+            repository.update(user)
+        }
+    }
+
+    fun delete(user: UserEntity) {
+        viewModelScope.launch {
+            repository.delete(user)
+        }
+    }
 }
