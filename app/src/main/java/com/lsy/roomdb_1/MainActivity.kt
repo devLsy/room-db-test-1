@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.lsy.roomdb_1.ui.screen.UserScreen
 import com.lsy.roomdb_1.ui.theme.RoomDB1Theme
+import com.lsy.roomdb_1.ui.viewmodel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RoomDB1Theme {
-
+                userApp()
             }
         }
     }
@@ -27,9 +29,7 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    RoomDB1Theme {
-    }
+fun userApp() {
+    val userViewModel: UserViewModel = viewModel()
 }
