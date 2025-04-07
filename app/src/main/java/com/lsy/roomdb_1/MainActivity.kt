@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.lsy.roomdb_1.data.db.AppDatabase
+import com.lsy.roomdb_1.data.db.repository.UserRepository
 import com.lsy.roomdb_1.ui.screen.UserScreen
 import com.lsy.roomdb_1.ui.theme.RoomDB1Theme
 import com.lsy.roomdb_1.ui.viewmodel.UserViewModel
@@ -19,17 +21,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val database = AppDatabase.getDatabase(this)
+        val repository = UserRepository(database.userDao())
+        val userViewModel = UserViewModel(repository)
+
         setContent {
             RoomDB1Theme {
-                userApp()
+                UserScreen(userViewModel)
             }
         }
     }
 }
 
 
-
-@Composable
-fun userApp() {
-    val userViewModel: UserViewModel = viewModel()
-}
