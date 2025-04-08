@@ -39,6 +39,7 @@ fun UserScreen(viewModel: UserViewModel) {
                     viewModel.insert(UserEntity(name = name, age = age.toInt()))
                     name = ""
                     age = ""
+                    viewModel.getAllUsers()
                 }
             }) {
                 Text("추가")
