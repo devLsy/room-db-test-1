@@ -78,7 +78,7 @@ fun reg(navController: NavController, viewModel: UserViewModel) {
         },
         modifier = Modifier.fillMaxWidth()
         ) {
-            Text("저장")
+            Text("저장!")
         }
     }
 }
