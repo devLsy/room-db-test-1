@@ -5,10 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lsy.roomdb_1.ui.screen.home
+import com.lsy.roomdb_1.ui.viewmodel.UserViewModel
 
 @Composable
-fun NavGrapth(navController: NavHostController) {
+fun NavGrapth(navController: NavHostController, userViewModel: UserViewModel) {
     NavHost(navController = navController, startDestination = "home") {
-        composable("home") { home(navController = navController)  }
+        composable("home") { home(navController = navController, viewModel = userViewModel)  }
     }
 }

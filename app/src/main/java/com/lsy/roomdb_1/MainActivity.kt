@@ -40,17 +40,17 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             RoomDB1Theme {
-                appMain()
+                appMain(userViewModel)
             }
         }
     }
 }
 
 @Composable
-fun appMain() {
+fun appMain(userViewModel: UserViewModel) {
     val navController = rememberNavController()
     val menuItems = listOf(NavigationItem("홈", "home"), NavigationItem("등록", "bucketList"), NavigationItem("상세", "routine"))
-    Scaffold(topBar = { AppTopBar(menuItems, navController) }, content = { paddingValues -> Box(modifier = Modifier.fillMaxSize().padding(paddingValues), contentAlignment = Alignment.Center) { NavGrapth(navController) } })
+    Scaffold(topBar = { AppTopBar(menuItems, navController) }, content = { paddingValues -> Box(modifier = Modifier.fillMaxSize().padding(paddingValues), contentAlignment = Alignment.Center) { NavGrapth(navController, userViewModel) } })
 }
 
 
