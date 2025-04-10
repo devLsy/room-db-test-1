@@ -59,7 +59,7 @@ fun reg(navController: NavController, viewModel: UserViewModel) {
 
         TextField(
             value = age,
-            onValueChange = { name = it },
+            onValueChange = { age = it },
             label = { Text("나이") },
             modifier = Modifier.fillMaxWidth()
         )
