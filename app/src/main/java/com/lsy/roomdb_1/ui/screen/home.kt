@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,13 +29,12 @@ fun home(navController: NavController, viewModel: UserViewModel) {
 
     LaunchedEffect(Unit) {
         viewModel.getAllUsers()
-        Log.d("userList", "Fetched users: ${userList.joinToString()}")
     }
+    Log.d("userList", "Fetched users: ${userList.joinToString()}")
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
-            // TopAppBar 추가
-            androidx.compose.material3.TopAppBar(
+            TopAppBar(
                 title = { Text("홈 화면") },
                 actions = {},
             )
