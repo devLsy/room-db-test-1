@@ -10,10 +10,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,13 +28,17 @@ import com.lsy.roomdb_1.ui.viewmodel.UserViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun home(navController: NavController, viewModel: UserViewModel) {
-
     val userList by viewModel.allUsers.observeAsState(initial = emptyList())
+    var searchQuery by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         viewModel.getAllUsers()
     }
     Log.d("userList", "Fetched users: ${userList.joinToString()}")
+
+    val filteredUsers = userList.filter { user ->
+        user.name.contains(searchQuery, ignoreCase = true)
+    }
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
@@ -38,7 +46,19 @@ fun home(navController: NavController, viewModel: UserViewModel) {
                 title = { Text("홈 화면") },
                 actions = {},
             )
-            LazyColumn { items(userList) { user -> @androidx.compose.runtime.Composable { userRow(user) } } }
+            TextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                placeholder = { Text("이름으로 검색") }
+            )
+            LazyColumn {
+                items(filteredUsers) { user ->
+                    userRow(user)
+                }
+            }
         }
     }
 }
